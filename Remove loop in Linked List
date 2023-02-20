@@ -1,0 +1,33 @@
+class Solution
+{
+    public:
+    //Function to remove a loop in the linked list.
+    void removeLoop(Node* head)
+    {
+        // code here
+        // just remove the loop without losing any nodes
+        unordered_map<Node*,bool>m;
+        Node* temp =head;
+        while(temp!=NULL){
+            if(m[temp->next] ==true){
+                temp->next=NULL;
+            }
+            m[temp]=true;
+            temp=temp->next;
+        }
+    }
+};
+
+
+
+Here's a step-by-step explanation of how the code works:
+
+Initialize an empty unordered map m.
+Initialize a pointer temp to the head of the linked list.
+While temp is not NULL, do the following:
+a. Check if the next node of temp is already in the map m. If it is, then it means that we have encountered a node that is already in the linked list, which indicates the start of the loop.
+b. If we have found the start of the loop, set the next pointer of the previous node (i.e., temp) to NULL to remove the loop.
+c. Add the current node temp to the map m.
+d. Move to the next node by setting temp to its next pointer.
+When the loop ends, the linked list should be loop-free.
+It's worth noting that this approach assumes that there is only one loop in the linked list. If there are multiple loops, this code may not work correctly. Additionally, this code uses extra space to store the visited nodes in the unordered map, so it may not be the most memory-efficient solution for large linked lists.
