@@ -1,0 +1,27 @@
+class Solution
+{
+    public:
+    int addRecursive(Node *head) {
+        // Base case. Adding 1 when we reach the end
+        if(head == NULL)
+            return 1;
+        // Recusrsive case
+        int carry = addRecursive(head->next);
+        int curr = head->data + carry;
+        head->data = curr % 10;
+        return (curr/10);
+    }
+    Node* addOne(Node *head) 
+    {
+        int carry = addRecursive(head);
+        if(carry) {
+            Node *newNode = new Node(carry);
+            newNode->next = head;
+            head = newNode;
+        }
+        return head;
+    }
+};
+
+
+//RECURSIVE METHOD
